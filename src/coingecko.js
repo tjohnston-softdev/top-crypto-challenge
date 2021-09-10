@@ -1,11 +1,4 @@
-const asyncModule = require("async");
 const needle = require("needle");
-
-asyncModule.forever(checkApiStatus, function()
-{
-	console.log("X");
-});
-
 
 function checkApiStatus(requestCallback)
 {
@@ -15,15 +8,19 @@ function checkApiStatus(requestCallback)
 		
 		if (pingErr !== null)
 		{
-			replyMsg = "ERROR: " + pingErr.message;
+			replyMsg = "PING REQUEST ERROR";
 		}
 		else
 		{
-			replyMsg += "RETURN: ";
-			replyMsg += [pingReply.statusCode, pingReply.statusMessage].join(" - ");
+			replyMsg = [pingReply.statusCode, pingReply.statusMessage].join(" - ");
 		}
 		
-		console.log(replyMsg);
-		return requestCallback(null, true);
+		return requestCallback(null, replyMsg);
 	});
 }
+
+
+module.exports =
+{
+	checkStatus: checkApiStatus
+};

@@ -1,16 +1,23 @@
 # Changelog
 
-**./package.json**
-* Installed 'async' module.
-	* This is temporary for testing purposes.
+**./src/coingecko.js**
+* Removed:
+	* 'async' library requirement.
+	* `asyncModule.forever` call
+* Changes to 'checkApiStatus'
+	* If there is a request error, the result message will simply be "PING REQUEST ERROR"
+	* Removed "RETURN:" prefix from successful reply message.
+	* Removed console log.
+	* Returns 'replyMsg' regardless of the result.
+	* Called publicly as 'checkStatus'
 
 ---
 
-**./src/coingecko.js**
-* New file - This is where Coingecko API requests will be made.
-* Does not have any complete functions at this stage.
-* When you execute this file:
-	* Send Ping requests in an infinite loop and display the result message.
-	* Indicates if the reply was successful or not.
-	* Eventually leads to HTTP 429 results.
-	* Rate limit is 50 requests / minute.
+**./routes/coin-status.js**
+* New file - Handles endpoint for `GET /api/coin-status/`
+
+---
+
+**./app.js**
+* Added requirement: './routes/coin-status' (coinStatusRouter)
+* Defined `GET /api/coin-status/` endpoint.
