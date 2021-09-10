@@ -15,7 +15,7 @@ function checkApiStatus(requestCallback)
 			replyMsg = pingReply.statusCode + " - " + pingReply.statusMessage;
 		}
 		
-		return requestCallback(null, replyMsg);
+		return requestCallback(replyMsg);
 	});
 }
 
