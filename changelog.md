@@ -1,3 +1,4 @@
 # Changelog
 
-Deleted file: '/public/scripts/readme.md'
+**./package.json**
+* Uninstalled 'async' module.
