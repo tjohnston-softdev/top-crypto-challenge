@@ -1,4 +1,4 @@
 # Changelog
 
-**./src/coingecko.js - checkApiStatus**
-* Reintroduced dash separator for successful message.
+**./routes/coin-status.js**
+* File deleted.
