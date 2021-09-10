@@ -1,5 +1,6 @@
 const needle = require("needle");
-const topURL = getToplistURL();
+const topURL = writeToplistURL();
+var coinsList = [];
 
 function checkApiStatus(requestCallback)
 {
@@ -40,6 +41,31 @@ function getCoinToplist(requestCallback)
 }
 
 
+function getNamesList(intlMode, requestCallback)
+{
+	var replyMsg = "";
+	
+	needle.get("https://api.coingecko.com/api/v3/coins/list", function (listErr, listReply)
+	{
+		if (listErr !== null)
+		{
+			replyMsg = writeRequestError("coin names list", listErr.message);
+			return requestCallback(new Error(replyMsg), null);
+		}
+		else if (intlMode === true)
+		{
+			coinsList = listReply.body;
+			return requestCallback(null, true);
+		}
+		else
+		{
+			coinsList = listReply.body;
+			return requestCallback(null, coinsList);
+		}
+	});
+}
+
+
 function writeRequestError(reqDesc, flagMsg)
 {
 	var writeRes = "";
@@ -53,7 +79,7 @@ function writeRequestError(reqDesc, flagMsg)
 }
 
 
-function getToplistURL()
+function writeToplistURL()
 {
 	var urlRes = "";
 	
@@ -71,5 +97,6 @@ function getToplistURL()
 module.exports =
 {
 	checkStatus: checkApiStatus,
-	getToplist: getCoinToplist
+	getToplist: getCoinToplist,
+	getNames: getNamesList
 };
