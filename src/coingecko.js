@@ -8,15 +8,28 @@ function checkApiStatus(requestCallback)
 		
 		if (pingErr !== null)
 		{
-			replyMsg = "PING REQUEST ERROR";
+			replyMsg = writeRequestError("status check.", pingErr.message);
 		}
 		else
 		{
-			replyMsg = [pingReply.statusCode, pingReply.statusMessage].join(" - ");
+			replyMsg = pingReply.statusCode + " - " + pingReply.statusMessage;
 		}
 		
 		return requestCallback(null, replyMsg);
 	});
+}
+
+
+function writeRequestError(reqDesc, flagMsg)
+{
+	var writeRes = "";
+	
+	writeRes += "Error performing ";
+	writeRes += reqDesc;
+	writeRes += "\r\n";
+	writeRes += flagMsg;
+	
+	return writeRes;
 }
 
 
