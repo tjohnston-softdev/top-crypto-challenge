@@ -13,7 +13,7 @@ function checkApiStatus(requestCallback)
 		}
 		else
 		{
-			replyMsg = pingReply.statusCode + pingReply.statusMessage;
+			replyMsg = pingReply.statusCode + " - " + pingReply.statusMessage;
 		}
 		
 		return requestCallback(replyMsg);
