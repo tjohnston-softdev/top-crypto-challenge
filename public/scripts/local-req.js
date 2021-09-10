@@ -13,6 +13,6 @@ function callStatusRequest()
 		}
 	};
 	
-	requestObj.open("GET", "api/coin-status");
+	requestObj.open("GET", "api/coins/status");
 	requestObj.send();
 }
