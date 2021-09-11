@@ -35,8 +35,6 @@ router.get('/top', function(req, res, next)
 		}
 		else
 		{
-			var first = coinsRes[0];
-			console.log(first);
 			res.send(coinsRes);
 		}
 	});
