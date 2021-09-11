@@ -1,3 +1,5 @@
+var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
+
 function callMarketRequest()
 {
 	var loadElement = document.getElementById("loadContainer");
@@ -61,12 +63,12 @@ function createDataTable(retrievedData, outpEle)
 		defineNumberCell(currencyRow, rankNumber);
 		defineImageCell(currencyRow, currencyObject.image, currencyObject.name);
 		defineNameCell(currencyRow, currencyObject.name, currencyObject.id, currencyObject.symbol);
-		defineValueCell(currencyRow, priceValue);
+		defineValueCell(currencyRow, priceValue, true);
 		definePercentCell(currencyRow, hourDiff);
 		definePercentCell(currencyRow, dayDiff);
 		definePercentCell(currencyRow, weekDiff);
-		defineValueCell(currencyRow, dayVolume);
-		defineValueCell(currencyRow, capValue);
+		defineValueCell(currencyRow, dayVolume, false);
+		defineValueCell(currencyRow, capValue, false);
 		
 		tableBody.appendChild(currencyRow);
 	}
@@ -152,10 +154,21 @@ function defineNameCell(rowObj, nameTxt, coinID, symbolTxt)
 }
 
 
-function defineValueCell(rowObj, valueAmount)
+function defineValueCell(rowObj, valueAmount, inclCents)
 {
 	var cellObj = document.createElement("td");
-	cellObj.innerHTML = "$" + valueAmount.toFixed(2);
+	var preparedCurrency = currencyFormatter.format(valueAmount);
+	var dollarCutoff = preparedCurrency.indexOf(".");
+	
+	if (inclCents === true)
+	{
+		cellObj.innerHTML = preparedCurrency;
+	}
+	else
+	{
+		cellObj.innerHTML = preparedCurrency.substring(0, dollarCutoff);
+	}
+	
 	rowObj.appendChild(cellObj);
 }
 
