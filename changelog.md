@@ -1,6 +1,3 @@
 # Changelog
 
-**./views/index.ejs**
-* Re-added:
-	* Button to call status request.
-	* Status output label.
+Snapshot 2021-09-11 16:35
