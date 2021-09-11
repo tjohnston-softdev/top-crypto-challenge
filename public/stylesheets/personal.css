@@ -8,10 +8,18 @@ a {
 }
 
 #loadContainer {
-	font: 12px;
+	display: none;
 }
 
 #loadSpinner {
 	width: 3rem;
 	height: 3rem;
+}
+
+.positiveChange {
+	color: green;
+}
+
+.negativeChange {
+	color: red;
 }
