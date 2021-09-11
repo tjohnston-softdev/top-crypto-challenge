@@ -1,6 +1,9 @@
 # Changelog
 
+**./public/stylesheets/**
+* Renamed 'style.css' to 'personal.css'
+
+---
+
 **./routes/index.ejs**
-* Fixed tab indentation for tags inside `<head>`
-* Commented out API status elements for now.
-* Replaced "Hello World" with link to GitHub profile.
+* Corrected reference to personal CSS file.
