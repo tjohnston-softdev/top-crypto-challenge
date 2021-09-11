@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+#loadContainer {
+	font: 12px;
+}
+
+#loadSpinner {
+	width: 3rem;
+	height: 3rem;
+}
