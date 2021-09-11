@@ -9,6 +9,7 @@ a {
 
 #loadContainer {
 	display: none;
+	height: 50vh;
 }
 
 #tableContainer {

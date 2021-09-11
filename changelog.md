@@ -1,20 +1,10 @@
 # Changelog
 
-**./public/scripts/market-data.js - callMarketRequest**
-* Renamed existing variables:
-	* 'loadElement' to 'loadContElement'
-	* 'outputElement' to 'tableDispElement'
-* Declared 'tableContElement' variable. Refers to table container element.
-	* Hidden during request.
-	* Displayed after rendering.
+**./views/index.ejs**
+* Added refresh button below table.
 
 ---
 
 **./public/stylesheets/personal.css**
-* Removed `#tableDisplay` selector.
-* Finally got the scrollbar to work.
-	* Changed maximum table height from 50% to 50vh.
-* Changed table overflow property to automatic.
-	* Will only display Hori or Vert scrollbars when necessary.
-	* Not by default
-	* Hori bar will not be displayed on full-sized screen.
+* Set load container height to 50% total.
+	* This is so the buttons below will stay in place during loading.
