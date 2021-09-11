@@ -148,7 +148,7 @@ function defineNameCell(rowObj, nameTxt, coinID, symbolTxt)
 	symbolElement.className = "namePart";
 	
 	cellObj.appendChild(linkElement);
-	cellObj.appendChild(symbolElement);
+	//cellObj.appendChild(symbolElement);
 	
 	rowObj.appendChild(cellObj);
 }
