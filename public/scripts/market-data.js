@@ -3,7 +3,7 @@ var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', curre
 function callMarketRequest()
 {
 	var loadElement = document.getElementById("loadContainer");
-	var outputElement = document.getElementById("tblMarket");
+	var outputElement = document.getElementById("tableDisplay");
 	var retrievedDataArray = null;
 	var renderedTable = null;
 	var requestObj = new XMLHttpRequest();
@@ -44,7 +44,7 @@ function createDataTable(retrievedData, outpEle)
 	var tableContainer = document.createElement("table");
 	var tableBody = document.createElement("tbody");
 	
-	tableContainer.className = "table";
+	tableContainer.className = "table table-responsive table-bordered";
 	defineHeaderRow(tableContainer);
 	
 	for (loopIndex = 0; loopIndex < retrievedData.length; loopIndex = loopIndex + 1)
