@@ -2,14 +2,16 @@ var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', curre
 
 function callMarketRequest()
 {
-	var loadElement = document.getElementById("loadContainer");
-	var outputElement = document.getElementById("tableDisplay");
+	var loadContElement = document.getElementById("loadContainer");
+	var tableContElement = document.getElementById("tableContainer");
+	var tableDispElement = document.getElementById("tableDisplay");
 	var retrievedDataArray = null;
 	var renderedTable = null;
 	var requestObj = new XMLHttpRequest();
 	
-	outputElement.innerHTML = "";
-	loadElement.style.display = "block";
+	tableContElement.style.display = "none";
+	tableDispElement.innerHTML = "";
+	loadContElement.style.display = "block";
 	
 	requestObj.onreadystatechange = function()
 	{
@@ -17,8 +19,9 @@ function callMarketRequest()
 		{
 			retrievedDataArray = JSON.parse(requestObj.responseText);
 			
-			createDataTable(retrievedDataArray, outputElement);
-			loadElement.style.display = "none";
+			createDataTable(retrievedDataArray, tableDispElement);
+			loadContElement.style.display = "none";
+			tableContElement.style.display = "block";
 		}
 	};
 	
