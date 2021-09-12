@@ -19,7 +19,7 @@ function initializeMarketTable()
 
 function setHeaderRow(tblCont)
 {
-	var colNames = ["No.", "", "Name", "Current Price", "1h", "24h", "7d", "24h Volume", "Market Cap"];
+	var colNames = ["No.", "", "Name", "Symbol", "Current Price", "1h", "24h", "7d", "24h Volume", "Market Cap"];
 	
 	var colIndex = 0;
 	var currentCell = null;
@@ -90,7 +90,8 @@ function renderCurrencyData()
 		
 		defineNumberCell(dataRow, dataObject.rank);
 		defineImageCell(dataRow, dataObject.imgURL, dataObject.name);
-		defineNameCell(dataRow, dataObject.name, dataObject.id, dataObject.symbol);
+		defineNameCell(dataRow, dataObject.name, dataObject.id);
+		defineSymbolCell(dataRow, dataObject.symbol);
 		defineValueCell(dataRow, dataObject.price, true);
 		definePercentCell(dataRow, dataObject.hour);
 		definePercentCell(dataRow, dataObject.day);
@@ -134,21 +135,24 @@ function defineImageCell(rowObj, imgURL, nameTxt)
 }
 
 
-function defineNameCell(rowObj, nameTxt, coinID, symbolTxt)
+function defineNameCell(rowObj, nameTxt, coinID)
 {
 	var cellObj = document.createElement("td");
 	var linkElement = document.createElement("a");
-	var symbolElement = document.createElement("span");
 	
 	linkElement.href = "https://www.coingecko.com/coins/" + coinID;
 	linkElement.target = "_blank";
 	linkElement.innerHTML = nameTxt;
 	
-	symbolElement.innerHTML = "   (" + symbolTxt.toUpperCase() + ")";
-	
 	cellObj.appendChild(linkElement);
-	cellObj.appendChild(symbolElement);
-	
+	rowObj.appendChild(cellObj);
+}
+
+
+function defineSymbolCell(rowObj, symbolTxt)
+{
+	var cellObj = document.createElement("td");
+	cellObj.innerHTML = symbolTxt.toUpperCase();
 	rowObj.appendChild(cellObj);
 }
 
