@@ -1,4 +1,5 @@
 var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
+var retrievedDataArray = null;
 
 function initializeMarketTable()
 {
@@ -47,13 +48,13 @@ function callMarketRequest()
 	var loadContElement = document.getElementById("loadContainer");
 	var tableContElement = document.getElementById("tableContainer");
 	var refreshButton = document.getElementById("btnRefresh");
-	var retrievedDataArray = null;
 	
 	var requestObj = new XMLHttpRequest();
 	
 	refreshButton.disabled = true;
 	tableContElement.style.display = "none";
 	loadContElement.style.display = "block";
+	retrievedDataArray = null;
 	
 	requestObj.onreadystatechange = function()
 	{
@@ -61,7 +62,7 @@ function callMarketRequest()
 		{
 			retrievedDataArray = JSON.parse(requestObj.responseText);
 			
-			renderCurrencyData(retrievedDataArray);
+			renderCurrencyData();
 			loadContElement.style.display = "none";
 			tableContElement.style.display = "block";
 			refreshButton.disabled = false;
@@ -73,7 +74,7 @@ function callMarketRequest()
 }
 
 
-function renderCurrencyData(retData)
+function renderCurrencyData()
 {
 	var loopIndex = 0;
 	var dataObject = {};
@@ -91,9 +92,9 @@ function renderCurrencyData(retData)
 	
 	tableBody.innerHTML = "";
 	
-	for (loopIndex = 0; loopIndex < retData.length; loopIndex = loopIndex + 1)
+	for (loopIndex = 0; loopIndex < retrievedDataArray.length; loopIndex = loopIndex + 1)
 	{
-		dataObject = retData[loopIndex];
+		dataObject = retrievedDataArray[loopIndex];
 		
 		rankNumber = dataObject["market_cap_rank"];
 		priceValue = dataObject["current_price"];
@@ -198,7 +199,7 @@ function definePercentCell(rowObj, percentAmount)
 	
 	if (percentAmount > 0)
 	{
-		percentElement.innerHTML = "+" + roundVal + "%";
+		percentElement.innerHTML = ["+", roundVal, "%"].join("");
 		percentElement.className = "positiveChange";
 	}
 	else if (percentAmount < 0)
