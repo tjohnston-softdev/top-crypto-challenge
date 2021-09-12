@@ -34,16 +34,19 @@
 			<div class="spinner-border text-primary" role="status" id="loadSpinner"></div>
 		</div>
 		
-		<div class="btn-group" role="group" aria-label="Actions">
-			<button type="button" class="btn btn-outline-primary" id="btnRefresh" onclick="callMarketRequest()" disabled>Refresh</button>
-			<button type="button" class="btn btn-outline-primary" onclick="callStatusRequest()">Status</button>
-		</div>
+		<button type="button" class="btn btn-primary" id="btnRefresh" onclick="callMarketRequest()" disabled>
+			<span class="icon-refresh"></span> Refresh
+		</button>
+		
+		<button type="button" class="btn btn-primary" onclick="callStatusRequest()">
+			<span class="icon-signal"></span> Status
+		</button>
+		
+		<br>
 		
 		<p id="txtStatus"></p>
 		<br>
 		
-		<span class="icon-signal"></span>
-		<span class="icon-refresh"></span>
 		<span class="icon-arrow-circle-up"></span>
 		<span class="icon-arrow-circle-down"></span>
 		
