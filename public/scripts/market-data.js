@@ -1,5 +1,6 @@
 var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
 var retrievedDataArray = null;
+var sortObj = {col: "rank", dir: -1};
 
 function initializeMarketTable()
 {
@@ -19,25 +20,67 @@ function initializeMarketTable()
 
 function setHeaderRow(tblCont)
 {
-	var colNames = ["No.", "", "Name", "Symbol", "Current Price", "1h", "24h", "7d", "24h Volume", "Market Cap"];
-	
-	var colIndex = 0;
-	var currentCell = null;
-	
 	var headContainer = document.createElement("thead");
 	var headRow = document.createElement("tr");
 	
-	for (colIndex = 0; colIndex < colNames.length; colIndex = colIndex + 1)
-	{
-		currentCell = document.createElement("th");
-		currentCell.setAttribute("scope", "col");
-		currentCell.innerHTML = colNames[colIndex];
-		
-		headRow.appendChild(currentCell);
-	}
+	addColumn("No.", "rank", true, headRow);
+	addColumn("", "imgURL", false, headRow);
+	addColumn("Name", "name", true, headRow);
+	addColumn("Symbol", "symbol", true, headRow);
+	addColumn("Current Price", "price", true, headRow);
+	addColumn("1h", "hour", true, headRow);
+	addColumn("24h", "day", true, headRow);
+	addColumn("7d", "week", true, headRow);
+	addColumn("24h Volume", "volume", true, headRow);
+	addColumn("Market Cap", "marketCap", true, headRow);
 	
 	headContainer.appendChild(headRow);
 	tblCont.appendChild(headContainer);
+}
+
+
+function addColumn(displayText, colProp, allowSort, headObj)
+{
+	var headerCell = document.createElement("th");
+	var nameElement = document.createElement("span");
+	var sortElement = null;
+	
+	headerCell.setAttribute("scope", "col");
+	nameElement.innerHTML = displayText + "   ";
+	headerCell.appendChild(nameElement);
+	
+	if (allowSort === true)
+	{
+		sortElement = document.createElement("span");
+		sortElement.className = "icon-arrow-circle-up";
+		sortElement.setAttribute("data-prop", colProp);
+		sortElement.addEventListener("click", handleDataSort, false);
+		headerCell.appendChild(sortElement);
+	}
+	
+	headObj.appendChild(headerCell);
+}
+
+
+function handleDataSort(clickEvent)
+{
+	sortObj.prop = clickEvent.target.getAttribute("data-prop");
+	
+	
+	if (clickEvent.target.className === "icon-arrow-circle-up")
+	{
+		clickEvent.target.className = "icon-arrow-circle-down"
+		sortObj.dir = 1;
+		retrievedDataArray.reverse();
+	}
+	else
+	{
+		clickEvent.target.className = "icon-arrow-circle-up"
+		sortObj.dir = -1;
+	}
+	
+	sortCurrencyData();
+	renderCurrencyData();
 }
 
 
@@ -62,7 +105,9 @@ function callMarketRequest()
 		{
 			retrievedDataArray = JSON.parse(requestObj.responseText);
 			
+			sortCurrencyData();
 			renderCurrencyData();
+			
 			loadContElement.style.display = "none";
 			tableContElement.style.display = "block";
 			refreshButton.disabled = false;
@@ -72,6 +117,29 @@ function callMarketRequest()
 	requestObj.open("GET", "api/coins/top");
 	requestObj.send();
 }
+
+
+function sortCurrencyData()
+{
+	retrievedDataArray.sort(function(a, b)
+	{
+		if (a[sortObj.prop] > b[sortObj.prop])
+		{
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+	});
+	
+	if (sortObj.dir > 0)
+	{
+		retrievedDataArray.reverse();
+	}
+	
+}
+
 
 
 function renderCurrencyData()
