@@ -143,13 +143,11 @@ function defineNameCell(rowObj, nameTxt, coinID, symbolTxt)
 	linkElement.href = "https://www.coingecko.com/coins/" + coinID;
 	linkElement.target = "_blank";
 	linkElement.innerHTML = nameTxt;
-	linkElement.className = "namePart";
 	
-	symbolElement.innerHTML = "(" + symbolTxt.toUpperCase() + ")";
-	symbolElement.className = "namePart";
+	symbolElement.innerHTML = "   (" + symbolTxt.toUpperCase() + ")";
 	
 	cellObj.appendChild(linkElement);
-	//cellObj.appendChild(symbolElement);
+	cellObj.appendChild(symbolElement);
 	
 	rowObj.appendChild(cellObj);
 }
