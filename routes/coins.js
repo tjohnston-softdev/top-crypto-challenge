@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const coingecko = require("../src/coingecko");
+const dataPrep = require("../src/data-prep");
 
 
 // Retrieve coin names on startup.
@@ -35,6 +36,7 @@ router.get('/top', function(req, res, next)
 		}
 		else
 		{
+			dataPrep.prepareMarketCap(coinsRes);
 			res.send(coinsRes);
 		}
 	});

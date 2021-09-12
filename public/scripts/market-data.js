@@ -78,42 +78,25 @@ function renderCurrencyData()
 {
 	var loopIndex = 0;
 	var dataObject = {};
-	
-	var rankNumber = null;
-	var priceValue = null;
-	var hourDiff = null;
-	var dayDiff = null;
-	var weekDiff = null;
-	var dayVolume = null;
-	var capValue = null;
-	
 	var dataRow = null;
-	var tableBody = document.getElementById("marketRows");
 	
+	var tableBody = document.getElementById("marketRows");
 	tableBody.innerHTML = "";
 	
 	for (loopIndex = 0; loopIndex < retrievedDataArray.length; loopIndex = loopIndex + 1)
 	{
 		dataObject = retrievedDataArray[loopIndex];
-		
-		rankNumber = dataObject["market_cap_rank"];
-		priceValue = dataObject["current_price"];
-		hourDiff = dataObject["price_change_percentage_1h_in_currency"];
-		dayDiff = dataObject["price_change_percentage_24h_in_currency"];
-		weekDiff = dataObject["price_change_percentage_7d_in_currency"];
-		dayVolume = dataObject["total_volume"];
-		capValue = dataObject["market_cap"];
-		
 		dataRow = document.createElement("tr");
-		defineNumberCell(dataRow, rankNumber);
-		defineImageCell(dataRow, dataObject.image, dataObject.name);
+		
+		defineNumberCell(dataRow, dataObject.rank);
+		defineImageCell(dataRow, dataObject.imgURL, dataObject.name);
 		defineNameCell(dataRow, dataObject.name, dataObject.id, dataObject.symbol);
-		defineValueCell(dataRow, priceValue, true);
-		definePercentCell(dataRow, hourDiff);
-		definePercentCell(dataRow, dayDiff);
-		definePercentCell(dataRow, weekDiff);
-		defineValueCell(dataRow, dayVolume, false);
-		defineValueCell(dataRow, capValue, false);
+		defineValueCell(dataRow, dataObject.price, true);
+		definePercentCell(dataRow, dataObject.hour);
+		definePercentCell(dataRow, dataObject.day);
+		definePercentCell(dataRow, dataObject.week);
+		defineValueCell(dataRow, dataObject.volume, false);
+		defineValueCell(dataRow, dataObject.marketCap, false);
 		
 		tableBody.appendChild(dataRow);
 	}

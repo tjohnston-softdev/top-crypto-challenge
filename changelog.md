@@ -1,12 +1,28 @@
 # Changelog
 
-**./public/scripts/market-data.js**
-* callMarketRequest
-	* 'retrievedDataArray' is now a global variable.
-	* 'retrievedDataArray' is set to null before new request sent.
-	* Removed argument from 'renderCurrencyData' call.
-* renderCurrencyData
-	* Replaced 'retData' parameter with reference to 'retrievedDataArray'
-* definePercentCell
-	* Re-structured how positive value text is written.
-	* A little more readable.
+**./src/data-prep.js**
+* New file - Used to prepare market cap data for transmission.
+
+---
+
+**./routes/index.js**
+* Changed bracket style.
+
+---
+
+**./routes/coins.js**
+* Added requirement: '../src/data-prep'
+* On successful `/top` request:
+	* Call 'dataPrep.prepareMarketCap' before sending.
+	* Removes unnecessary data from payload.
+
+---
+
+**./public/scripts/market-data.js - renderCurrencyData**
+* Replaced local variables with new back-end property names.
+	* 'rankNumber' to 'rank'
+	* 'priceValue' to 'price'
+	* 'hourDiff' to 'hour'
+	* 'dayVolume' to 'volume'
+	* 'capValue' to 'marketCap'
+* Replaced 'image' property with 'imgURL'
