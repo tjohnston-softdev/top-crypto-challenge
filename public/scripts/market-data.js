@@ -6,7 +6,7 @@ function initializeMarketTable()
 	var renderedTable = document.createElement("table");
 	var bodyElement = document.createElement("tbody");
 	
-	tableContainer.className = "table table-responsive table-bordered";
+	renderedTable.className = "table table-responsive table-bordered";
 	defineHeaderRow(renderedTable);
 	bodyElement.id = "marketRows";
 	renderedTable.appendChild(bodyElement);
