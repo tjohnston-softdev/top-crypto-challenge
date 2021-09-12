@@ -1,6 +1,6 @@
 var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
 var retrievedDataArray = null;
-var sortObj = {col: "rank", dir: -1};
+var sortObj = {col: "rank", dir: -1, alpha: false};
 
 function initializeMarketTable()
 {
@@ -23,23 +23,23 @@ function setHeaderRow(tblCont)
 	var headContainer = document.createElement("thead");
 	var headRow = document.createElement("tr");
 	
-	addColumn("No.", "rank", true, headRow);
-	addColumn("", "imgURL", false, headRow);
-	addColumn("Name", "name", true, headRow);
-	addColumn("Symbol", "symbol", true, headRow);
-	addColumn("Current Price", "price", true, headRow);
-	addColumn("1h", "hour", true, headRow);
-	addColumn("24h", "day", true, headRow);
-	addColumn("7d", "week", true, headRow);
-	addColumn("24h Volume", "volume", true, headRow);
-	addColumn("Market Cap", "marketCap", true, headRow);
+	addColumn("No.", "rank", true, "", headRow);
+	addColumn("", "imgURL", false, "", headRow);
+	addColumn("Name", "name", true, "1", headRow);
+	addColumn("Symbol", "symbol", true, "", headRow);
+	addColumn("Current Price", "price", true, "", headRow);
+	addColumn("1h", "hour", true, "", headRow);
+	addColumn("24h", "day", true, "", headRow);
+	addColumn("7d", "week", true, "", headRow);
+	addColumn("24h Volume", "volume", true, "", headRow);
+	addColumn("Market Cap", "marketCap", true, "", headRow);
 	
 	headContainer.appendChild(headRow);
 	tblCont.appendChild(headContainer);
 }
 
 
-function addColumn(displayText, colProp, allowSort, headObj)
+function addColumn(displayText, colProp, allowSort, alphaFlag, headObj)
 {
 	var headerCell = document.createElement("th");
 	var nameElement = document.createElement("span");
@@ -54,6 +54,7 @@ function addColumn(displayText, colProp, allowSort, headObj)
 		sortElement = document.createElement("span");
 		sortElement.className = "icon-arrow-circle-up";
 		sortElement.setAttribute("data-prop", colProp);
+		sortElement.setAttribute("data-alpha", alphaFlag);
 		sortElement.addEventListener("click", handleDataSort, false);
 		headerCell.appendChild(sortElement);
 	}
@@ -64,8 +65,10 @@ function addColumn(displayText, colProp, allowSort, headObj)
 
 function handleDataSort(clickEvent)
 {
-	sortObj.prop = clickEvent.target.getAttribute("data-prop");
+	var alphaStatus = clickEvent.target.getAttribute("data-alpha");
 	
+	sortObj.prop = clickEvent.target.getAttribute("data-prop");
+	sortObj.alpha = Boolean(alphaStatus);
 	
 	if (clickEvent.target.className === "icon-arrow-circle-up")
 	{
@@ -121,17 +124,14 @@ function callMarketRequest()
 
 function sortCurrencyData()
 {
-	retrievedDataArray.sort(function(a, b)
+	if (sortObj.alpha === true)
 	{
-		if (a[sortObj.prop] > b[sortObj.prop])
-		{
-			return 1;
-		}
-		else
-		{
-			return -1;
-		}
-	});
+		performAlphaSort();
+	}
+	else
+	{
+		performNumSort();
+	}
 	
 	if (sortObj.dir > 0)
 	{
@@ -140,6 +140,23 @@ function sortCurrencyData()
 	
 }
 
+
+function performAlphaSort()
+{
+	retrievedDataArray.sort(function(a, b)
+	{
+		return Boolean(a[sortObj.prop].toLowerCase() > b[sortObj.prop].toLowerCase());
+	});
+}
+
+
+function performNumSort()
+{
+	retrievedDataArray.sort(function(a, b)
+	{
+		return a[sortObj.prop] > b[sortObj.prop];
+	});
+}
 
 
 function renderCurrencyData()
