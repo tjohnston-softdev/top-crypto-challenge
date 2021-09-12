@@ -46,10 +46,12 @@ function callMarketRequest()
 {
 	var loadContElement = document.getElementById("loadContainer");
 	var tableContElement = document.getElementById("tableContainer");
+	var refreshButton = document.getElementById("btnRefresh");
 	var retrievedDataArray = null;
 	
 	var requestObj = new XMLHttpRequest();
 	
+	refreshButton.disabled = true;
 	tableContElement.style.display = "none";
 	loadContElement.style.display = "block";
 	
@@ -62,6 +64,7 @@ function callMarketRequest()
 			renderCurrencyData(retrievedDataArray);
 			loadContElement.style.display = "none";
 			tableContElement.style.display = "block";
+			refreshButton.disabled = false;
 		}
 	};
 	
