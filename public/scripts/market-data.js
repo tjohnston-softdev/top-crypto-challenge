@@ -7,7 +7,7 @@ function initializeMarketTable()
 	var bodyElement = document.createElement("tbody");
 	
 	renderedTable.className = "table table-responsive table-bordered";
-	defineHeaderRow(renderedTable);
+	setHeaderRow(renderedTable);
 	bodyElement.id = "marketRows";
 	renderedTable.appendChild(bodyElement);
 	
@@ -16,7 +16,7 @@ function initializeMarketTable()
 }
 
 
-function defineHeaderRow(tblCont)
+function setHeaderRow(tblCont)
 {
 	var colNames = ["No.", "", "Name", "Current Price", "1h", "24h", "7d", "24h Volume", "Market Cap"];
 	
@@ -59,7 +59,7 @@ function callMarketRequest()
 		{
 			retrievedDataArray = JSON.parse(requestObj.responseText);
 			
-			createDataTable(retrievedDataArray);
+			renderCurrencyData(retrievedDataArray);
 			loadContElement.style.display = "none";
 			tableContElement.style.display = "block";
 		}
@@ -70,7 +70,7 @@ function callMarketRequest()
 }
 
 
-function createDataTable(retData)
+function renderCurrencyData(retData)
 {
 	var loopIndex = 0;
 	var dataObject = {};
