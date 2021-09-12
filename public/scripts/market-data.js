@@ -1,83 +1,18 @@
 var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
 
-function callMarketRequest()
+function initializeMarketTable()
 {
-	var loadContElement = document.getElementById("loadContainer");
-	var tableContElement = document.getElementById("tableContainer");
 	var tableDispElement = document.getElementById("tableDisplay");
-	var retrievedDataArray = null;
-	var renderedTable = null;
-	var requestObj = new XMLHttpRequest();
-	
-	tableContElement.style.display = "none";
-	tableDispElement.innerHTML = "";
-	loadContElement.style.display = "block";
-	
-	requestObj.onreadystatechange = function()
-	{
-		if (this.readyState === 4 && this.status === 200)
-		{
-			retrievedDataArray = JSON.parse(requestObj.responseText);
-			
-			createDataTable(retrievedDataArray, tableDispElement);
-			loadContElement.style.display = "none";
-			tableContElement.style.display = "block";
-		}
-	};
-	
-	requestObj.open("GET", "api/coins/top");
-	requestObj.send();
-}
-
-
-function createDataTable(retrievedData, outpEle)
-{
-	var loopIndex = 0;
-	var currencyObject = {};
-	
-	var rankNumber = null;
-	var priceValue = null;
-	var hourDiff = null;
-	var dayDiff = null;
-	var weekDiff = null;
-	var dayVolume = null;
-	var capValue = null;
-	
-	var currencyRow = null;
-	var tableContainer = document.createElement("table");
-	var tableBody = document.createElement("tbody");
+	var renderedTable = document.createElement("table");
+	var bodyElement = document.createElement("tbody");
 	
 	tableContainer.className = "table table-responsive table-bordered";
-	defineHeaderRow(tableContainer);
+	defineHeaderRow(renderedTable);
+	bodyElement.id = "marketRows";
+	renderedTable.appendChild(bodyElement);
 	
-	for (loopIndex = 0; loopIndex < retrievedData.length; loopIndex = loopIndex + 1)
-	{
-		currencyObject = retrievedData[loopIndex];
-		
-		rankNumber = currencyObject["market_cap_rank"];
-		priceValue = currencyObject["current_price"];
-		hourDiff = currencyObject["price_change_percentage_1h_in_currency"];
-		dayDiff = currencyObject["price_change_percentage_24h_in_currency"];
-		weekDiff = currencyObject["price_change_percentage_7d_in_currency"];
-		dayVolume = currencyObject["total_volume"];
-		capValue = currencyObject["market_cap"];
-		
-		currencyRow = document.createElement("tr");
-		defineNumberCell(currencyRow, rankNumber);
-		defineImageCell(currencyRow, currencyObject.image, currencyObject.name);
-		defineNameCell(currencyRow, currencyObject.name, currencyObject.id, currencyObject.symbol);
-		defineValueCell(currencyRow, priceValue, true);
-		definePercentCell(currencyRow, hourDiff);
-		definePercentCell(currencyRow, dayDiff);
-		definePercentCell(currencyRow, weekDiff);
-		defineValueCell(currencyRow, dayVolume, false);
-		defineValueCell(currencyRow, capValue, false);
-		
-		tableBody.appendChild(currencyRow);
-	}
-	
-	tableContainer.appendChild(tableBody);
-	outpEle.appendChild(tableContainer);
+	tableDispElement.appendChild(renderedTable);
+	callMarketRequest();
 }
 
 
@@ -102,6 +37,82 @@ function defineHeaderRow(tblCont)
 	
 	headContainer.appendChild(headRow);
 	tblCont.appendChild(headContainer);
+}
+
+
+
+
+function callMarketRequest()
+{
+	var loadContElement = document.getElementById("loadContainer");
+	var tableContElement = document.getElementById("tableContainer");
+	var retrievedDataArray = null;
+	
+	var requestObj = new XMLHttpRequest();
+	
+	tableContElement.style.display = "none";
+	loadContElement.style.display = "block";
+	
+	requestObj.onreadystatechange = function()
+	{
+		if (this.readyState === 4 && this.status === 200)
+		{
+			retrievedDataArray = JSON.parse(requestObj.responseText);
+			
+			createDataTable(retrievedDataArray);
+			loadContElement.style.display = "none";
+			tableContElement.style.display = "block";
+		}
+	};
+	
+	requestObj.open("GET", "api/coins/top");
+	requestObj.send();
+}
+
+
+function createDataTable(retData)
+{
+	var loopIndex = 0;
+	var dataObject = {};
+	
+	var rankNumber = null;
+	var priceValue = null;
+	var hourDiff = null;
+	var dayDiff = null;
+	var weekDiff = null;
+	var dayVolume = null;
+	var capValue = null;
+	
+	var dataRow = null;
+	var tableBody = document.getElementById("marketRows");
+	
+	tableBody.innerHTML = "";
+	
+	for (loopIndex = 0; loopIndex < retData.length; loopIndex = loopIndex + 1)
+	{
+		dataObject = retData[loopIndex];
+		
+		rankNumber = dataObject["market_cap_rank"];
+		priceValue = dataObject["current_price"];
+		hourDiff = dataObject["price_change_percentage_1h_in_currency"];
+		dayDiff = dataObject["price_change_percentage_24h_in_currency"];
+		weekDiff = dataObject["price_change_percentage_7d_in_currency"];
+		dayVolume = dataObject["total_volume"];
+		capValue = dataObject["market_cap"];
+		
+		dataRow = document.createElement("tr");
+		defineNumberCell(dataRow, rankNumber);
+		defineImageCell(dataRow, dataObject.image, dataObject.name);
+		defineNameCell(dataRow, dataObject.name, dataObject.id, dataObject.symbol);
+		defineValueCell(dataRow, priceValue, true);
+		definePercentCell(dataRow, hourDiff);
+		definePercentCell(dataRow, dayDiff);
+		definePercentCell(dataRow, weekDiff);
+		defineValueCell(dataRow, dayVolume, false);
+		defineValueCell(dataRow, capValue, false);
+		
+		tableBody.appendChild(dataRow);
+	}
 }
 
 
