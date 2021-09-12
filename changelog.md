@@ -1,3 +1,4 @@
 # Changelog
 
-Snapshot 2021-09-12 15:42
+**./src/coingecko.js - writeRequestError**
+* Displays written message to console.

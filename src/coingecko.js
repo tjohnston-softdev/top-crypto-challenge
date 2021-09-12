@@ -75,6 +75,8 @@ function writeRequestError(reqDesc, flagMsg)
 	writeRes += " request.\r\n";
 	writeRes += flagMsg;
 	
+	console.log(writeRes);
+	
 	return writeRes;
 }
 
