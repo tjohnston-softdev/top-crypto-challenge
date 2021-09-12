@@ -1,4 +1,3 @@
 # Changelog
 
-**./views/index.ejs**
-* Removed stray glyph icons at the bottom of the page.
+Snapshot 2021-09-12 15:42
