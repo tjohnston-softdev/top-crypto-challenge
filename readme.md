@@ -14,15 +14,15 @@ This attempt was developed across 10-13 September 2021 and immediately shared to
 
 ## Technologies
 
-* [Node JS](https://nodejs.org/en/) - Backend
-* [Express](https://expressjs.com/) - Server framework.
-* [EJS](https://ejs.co/) - View engine.
-* [Bootstrap v5.1.1](https://getbootstrap.com/) - CSS framework.
-* Placeholder image from [TableCheck Icons](https://github.com/tablecheck/tablecheck-icons)
+* Backend: [Node JS](https://nodejs.org/en/)
+* Server framework: [Express](https://expressjs.com/)
+* View engine: [EJS](https://ejs.co/)
+* CSS framework: [Bootstrap v5.1.1](https://getbootstrap.com/)
+* Placeholder image: [TableCheck Icons](https://github.com/tablecheck/tablecheck-icons)
 	* Hosted on [IconDuck](https://iconduck.com/icons/83812/question-square)
 	* Converted to .png at 50x50
 	* Retrieved 11 September 2021
-* Glyph icons from [Font Awesome](https://fontawesome.com/)
+* Glyph icons: [Font Awesome](https://fontawesome.com/)
 	* Compiled into a custom webfont using [IcoMoon](https://icomoon.io/app/#/select)
 	* Retrieved 12 September 2021
 

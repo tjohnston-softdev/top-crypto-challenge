@@ -1,3 +1,4 @@
 # Changelog
 
-Documentation
+**./readme.md**
+* Restructured technology credits.
