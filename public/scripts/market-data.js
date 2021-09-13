@@ -1,5 +1,6 @@
 var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
 var retrievedDataArray = null;
+var hideList = ["bitcoin", "dogecoin"];
 var sortObj = {col: "rank", dir: -1, alpha: false};
 
 function initializeMarketTable()
@@ -170,6 +171,7 @@ function renderCurrencyData()
 	var loopIndex = 0;
 	var dataObject = {};
 	var dataRow = null;
+	var hideView = false;
 	
 	var tableBody = document.getElementById("marketRows");
 	tableBody.innerHTML = "";
@@ -178,6 +180,7 @@ function renderCurrencyData()
 	{
 		dataObject = retrievedDataArray[loopIndex];
 		dataRow = document.createElement("tr");
+		hideView = hideList.includes(dataObject.id);
 		dataRow.id = "row-" + dataObject.id;
 		
 		defineNumberCell(dataRow, dataObject.rank);
@@ -190,6 +193,11 @@ function renderCurrencyData()
 		definePercentCell(dataRow, dataObject.week);
 		defineValueCell(dataRow, dataObject.volume, false);
 		defineValueCell(dataRow, dataObject.marketCap, false);
+		
+		if (hideView === true)
+		{
+			dataRow.style.display = "none";
+		}
 		
 		tableBody.appendChild(dataRow);
 	}
