@@ -1,4 +1,3 @@
 # Changelog
 
-**./instructions.md**
-* New file - Markdown interpretation of challenge instructions.
+Snapshot 2021-09-13 10:06
