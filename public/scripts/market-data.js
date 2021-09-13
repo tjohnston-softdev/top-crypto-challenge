@@ -172,6 +172,7 @@ function renderCurrencyData()
 	{
 		dataObject = retrievedDataArray[loopIndex];
 		dataRow = document.createElement("tr");
+		dataRow.id = "row-" + dataObject.id;
 		
 		defineNumberCell(dataRow, dataObject.rank);
 		defineImageCell(dataRow, dataObject.imgURL, dataObject.name);
