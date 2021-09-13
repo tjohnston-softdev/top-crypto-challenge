@@ -1,4 +1,3 @@
 # Changelog
 
-**./routes/coins.js**
-* Removed `/error` endpoint.
+Feature-complete
