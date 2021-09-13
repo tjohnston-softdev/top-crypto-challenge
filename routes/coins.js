@@ -22,7 +22,7 @@ router.get('/top', function(req, res, next)
 	{
 		if (coinsErr !== null)
 		{
-			res.send(coinsErr.message);
+			res.send(coinsErr);
 		}
 		else
 		{
@@ -30,6 +30,13 @@ router.get('/top', function(req, res, next)
 			res.send(coinsRes);
 		}
 	});
+});
+
+
+router.get('/error', function(req, res, next)
+{
+	var exampleErr = new Error("Something very bad happened.");
+	res.send(exampleErr);
 });
 
 

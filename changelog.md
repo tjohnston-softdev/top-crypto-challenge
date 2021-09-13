@@ -1,11 +1,10 @@
 # Changelog
 
 **./routes/coins.js**
-* Removed 'coingecko.getNames' call at the beginning
-* Removed `/names` endpoint.
+* If the `/top` endpoint returns an error, send the object and not just the message.
+* Wrote `/error` endpoint to test error handling for API.
 
 ---
 
 **./src/coingecko.js**
-* Removed 'coinsList' global variable.
-* Removed 'getNamesList' function.
+* Removed stray 'getNamesList' reference.

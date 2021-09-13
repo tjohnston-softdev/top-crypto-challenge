@@ -73,6 +73,5 @@ function writeToplistURL()
 module.exports =
 {
 	checkStatus: checkApiStatus,
-	getToplist: getCoinToplist,
-	getNames: getNamesList
+	getToplist: getCoinToplist
 };
