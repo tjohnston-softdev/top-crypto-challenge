@@ -1,6 +1,6 @@
 function callStatusRequest()
 {
-	var outputElement = document.getElementById("txtStatus");
+	var outputElement = document.getElementById("lblStatus");
 	var requestObj = new XMLHttpRequest();
 	
 	outputElement.innerHTML = "Checking . . .";
