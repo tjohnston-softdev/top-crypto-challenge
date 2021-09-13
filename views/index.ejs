@@ -31,7 +31,66 @@
 			</div>
 			<br>
 			
-			<div id="tableDisplay"></div>
+			<div id="tableDisplay">
+			
+				<table class="table table-responsive table-bordered">
+					<thead>
+						<tr>
+							<th scope="col">
+								<span>No.   </span>
+								<span class="icon-arrow-circle-up" data-prop="rank" data-alpha="" onclick="handleDataSort()"></span>
+							</th>
+							
+							<th scope="col">
+							</th>
+							
+							<th scope="col">
+								<span>Name   </span>
+								<span class="icon-arrow-circle-up" data-prop="name" data-alpha="1" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>Symbol   </span>
+								<span class="icon-arrow-circle-up" data-prop="symbol" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>Current Price   </span>
+								<span class="icon-arrow-circle-up" data-prop="price" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>1h   </span>
+								<span class="icon-arrow-circle-up" data-prop="hour" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>24h   </span>
+								<span class="icon-arrow-circle-up" data-prop="day" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>7d   </span>
+								<span class="icon-arrow-circle-up" data-prop="week" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>24h Volume   </span>
+								<span class="icon-arrow-circle-up" data-prop="volume" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+							<th scope="col">
+								<span>Market Cap   </span>
+								<span class="icon-arrow-circle-up" data-prop="marketCap" data-alpha="" onclick="handleDataSort(this)"></span>
+							</th>
+							
+						</tr>
+					</thead>
+					<tbody id="marketRows">
+					</tbody>
+				</table>
+			
+			</div>
 			
 		</div>
 		

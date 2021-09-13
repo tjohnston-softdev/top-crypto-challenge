@@ -5,90 +5,27 @@ var sortObj = {col: "rank", dir: -1, alpha: false};
 
 function initializeMarketTable()
 {
-	var tableDispElement = document.getElementById("tableDisplay");
-	var searchTextbox = document.getElementById("txtSearch");
-	var renderedTable = document.createElement("table");
-	
-	searchTextbox.value = "";
-	
-	renderedTable.className = "table table-responsive table-bordered";
-	setHeaderRow(renderedTable);
-	setTableBody(renderedTable);
-	
-	tableDispElement.appendChild(renderedTable);
+	document.getElementById("txtSearch").value = "";
 	callMarketRequest();
 }
 
 
-function setHeaderRow(tblCont)
+function handleDataSort(sortButton)
 {
-	var headContainer = document.createElement("thead");
-	var headRow = document.createElement("tr");
+	var alphaStatus = sortButton.getAttribute("data-alpha");
 	
-	addColumn("No.", "rank", true, "", headRow);
-	addColumn("", "imgURL", false, "", headRow);
-	addColumn("Name", "name", true, "1", headRow);
-	addColumn("Symbol", "symbol", true, "", headRow);
-	addColumn("Current Price", "price", true, "", headRow);
-	addColumn("1h", "hour", true, "", headRow);
-	addColumn("24h", "day", true, "", headRow);
-	addColumn("7d", "week", true, "", headRow);
-	addColumn("24h Volume", "volume", true, "", headRow);
-	addColumn("Market Cap", "marketCap", true, "", headRow);
-	
-	headContainer.appendChild(headRow);
-	tblCont.appendChild(headContainer);
-}
-
-
-function setTableBody(tblCont)
-{
-	var bodyElement = document.createElement("tbody");
-	bodyElement.id = "marketRows";
-	tblCont.appendChild(bodyElement);
-}
-
-
-function addColumn(displayText, colProp, allowSort, alphaFlag, headObj)
-{
-	var headerCell = document.createElement("th");
-	var nameElement = document.createElement("span");
-	var sortElement = null;
-	
-	headerCell.setAttribute("scope", "col");
-	nameElement.innerHTML = displayText + "   ";
-	headerCell.appendChild(nameElement);
-	
-	if (allowSort === true)
-	{
-		sortElement = document.createElement("span");
-		sortElement.className = "icon-arrow-circle-up";
-		sortElement.setAttribute("data-prop", colProp);
-		sortElement.setAttribute("data-alpha", alphaFlag);
-		sortElement.addEventListener("click", handleDataSort, false);
-		headerCell.appendChild(sortElement);
-	}
-	
-	headObj.appendChild(headerCell);
-}
-
-
-function handleDataSort(clickEvent)
-{
-	var alphaStatus = clickEvent.target.getAttribute("data-alpha");
-	
-	sortObj.prop = clickEvent.target.getAttribute("data-prop");
+	sortObj.prop = sortButton.getAttribute("data-prop");
 	sortObj.alpha = Boolean(alphaStatus);
 	
-	if (clickEvent.target.className === "icon-arrow-circle-up")
+	if (sortButton.className === "icon-arrow-circle-up")
 	{
-		clickEvent.target.className = "icon-arrow-circle-down"
+		sortButton.className = "icon-arrow-circle-down"
 		sortObj.dir = 1;
 		retrievedDataArray.reverse();
 	}
 	else
 	{
-		clickEvent.target.className = "icon-arrow-circle-up"
+		sortButton.className = "icon-arrow-circle-up"
 		sortObj.dir = -1;
 	}
 	
