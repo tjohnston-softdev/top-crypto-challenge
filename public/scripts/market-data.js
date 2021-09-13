@@ -6,12 +6,10 @@ function initializeMarketTable()
 {
 	var tableDispElement = document.getElementById("tableDisplay");
 	var renderedTable = document.createElement("table");
-	var bodyElement = document.createElement("tbody");
 	
 	renderedTable.className = "table table-responsive table-bordered";
 	setHeaderRow(renderedTable);
-	bodyElement.id = "marketRows";
-	renderedTable.appendChild(bodyElement);
+	setTableBody(renderedTable);
 	
 	tableDispElement.appendChild(renderedTable);
 	callMarketRequest();
@@ -36,6 +34,14 @@ function setHeaderRow(tblCont)
 	
 	headContainer.appendChild(headRow);
 	tblCont.appendChild(headContainer);
+}
+
+
+function setTableBody(tblCont)
+{
+	var bodyElement = document.createElement("tbody");
+	bodyElement.id = "marketRows";
+	tblCont.appendChild(bodyElement);
 }
 
 
