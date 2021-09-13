@@ -21,7 +21,6 @@ function handleDataSort(sortButton)
 	{
 		sortButton.className = "icon-arrow-circle-down"
 		sortObj.dir = 1;
-		//retrievedDataArray.reverse();
 	}
 	else
 	{
