@@ -1,12 +1,15 @@
 var currencyFormatter = new Intl.NumberFormat('en-AU', {style: 'currency', currency: 'AUD'});
 var retrievedDataArray = null;
-var hideList = ["bitcoin", "dogecoin"];
+var hideList = [];
 var sortObj = {col: "rank", dir: -1, alpha: false};
 
 function initializeMarketTable()
 {
 	var tableDispElement = document.getElementById("tableDisplay");
+	var searchTextbox = document.getElementById("txtSearch");
 	var renderedTable = document.createElement("table");
+	
+	searchTextbox.value = "";
 	
 	renderedTable.className = "table table-responsive table-bordered";
 	setHeaderRow(renderedTable);
@@ -91,6 +94,56 @@ function handleDataSort(clickEvent)
 	
 	sortCurrencyData();
 	renderCurrencyData();
+}
+
+
+function callSearch()
+{
+	var inputElement = document.getElementById("txtSearch");
+	var prepKeyword = "";
+	
+	var loopIndex = 0;
+	var dataObject = {};
+	var rowID = "";
+	var rowElement = null;
+	var nameText = "";
+	var nameMatch = -1;
+	var symbolMatch = -1;
+	var matchFound = false;
+	
+	prepKeyword = inputElement.value.trim();
+	prepKeyword = prepKeyword.toUpperCase();
+	hideList = [];
+	
+	for (loopIndex = 0; loopIndex < retrievedDataArray.length; loopIndex = loopIndex + 1)
+	{
+		dataObject = retrievedDataArray[loopIndex];
+		rowID = "row-" + dataObject.id;
+		rowElement = document.getElementById(rowID);
+		nameText = dataObject.name.toUpperCase();
+		nameMatch = nameText.indexOf(prepKeyword);
+		symbolMatch = dataObject.symbol.indexOf(prepKeyword);
+		matchFound = false;
+		
+		if (nameMatch >= 0 && nameMatch < nameText.length)
+		{
+			matchFound = true;
+		}
+		else if (symbolMatch >= 0 && symbolMatch < dataObject.symbol.length)
+		{
+			matchFound = true;
+		}
+		
+		if (matchFound === true)
+		{
+			rowElement.style.visibility = "visible";
+		}
+		else
+		{
+			hideList.push(dataObject.id);
+			rowElement.style.visibility = "collapse";
+		}
+	}
 }
 
 
@@ -196,7 +249,7 @@ function renderCurrencyData()
 		
 		if (hideView === true)
 		{
-			dataRow.style.display = "none";
+			dataRow.style.visibility = "collapse";
 		}
 		
 		tableBody.appendChild(dataRow);

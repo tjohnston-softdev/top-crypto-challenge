@@ -1,10 +1,19 @@
 # Changelog
 
 **./public/scripts/market-data.js**
-* Declared global variable 'hideList'
-	* Stores the IDs of rows to hide.
-	* Based on search results.
-	* For testing, Bitcoin and Dogecoin have been hidden.
-* Changes to 'renderCurrencyData'
-	* Declared variable 'hideView' - Whether current row should be hidden.
-	* If 'hideView' is True, 'dataRow' display will be set to "none"
+* Wrote new function 'callSearch'
+	* Performs search and updates results.
+	* Toggles rows as needed.
+* Revised how rows are hidden in 'renderCurrencyData'
+	* Now uses 'visibility' instead of 'display'
+* Changes to 'initializeMarketTable'
+	* Declared 'searchTextbox' variable.
+	* Set 'searchTextbox' value to empty in case static HTML fails.
+* Removed test values from 'hideList'
+
+---
+
+**./views/index.ejs**
+* Added 'onkeyup' event to 'txtSearch'
+	* Whenever input is changed, run the 'callSearch' function from 'market-data.js'
+* Added empty value property to 'txtSearch'
