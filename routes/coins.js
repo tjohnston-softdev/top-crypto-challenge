@@ -4,16 +4,6 @@ const coingecko = require("../src/coingecko");
 const dataPrep = require("../src/data-prep");
 
 
-// Retrieve coin names on startup.
-coingecko.getNames(true, function(nameIntlErr, nameIntlRes)
-{
-	if (nameIntlRes === true)
-	{
-		console.log("Coin names initialized");
-	}
-});
-
-
 // GET CoinGecko API status.
 router.get('/status', function(req, res, next)
 {
@@ -38,22 +28,6 @@ router.get('/top', function(req, res, next)
 		{
 			dataPrep.prepareMarketCap(coinsRes);
 			res.send(coinsRes);
-		}
-	});
-});
-
-// GET names of all coins tracked.
-router.get('/names', function(req, res, next)
-{
-	coingecko.getNames(false, function (namesErr, namesRes)
-	{
-		if (namesErr !== null)
-		{
-			res.send(namesErr.message);
-		}
-		else
-		{
-			res.send(namesRes);
 		}
 	});
 });

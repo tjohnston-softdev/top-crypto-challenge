@@ -1,6 +1,5 @@
 const needle = require("needle");
 const topURL = writeToplistURL();
-var coinsList = [];
 
 function checkApiStatus(requestCallback)
 {
@@ -36,31 +35,6 @@ function getCoinToplist(requestCallback)
 		else
 		{
 			return requestCallback(null, listReply.body);
-		}
-	});
-}
-
-
-function getNamesList(intlMode, requestCallback)
-{
-	var replyMsg = "";
-	
-	needle.get("https://api.coingecko.com/api/v3/coins/list", function (listErr, listReply)
-	{
-		if (listErr !== null)
-		{
-			replyMsg = writeRequestError("coin names list", listErr.message);
-			return requestCallback(new Error(replyMsg), null);
-		}
-		else if (intlMode === true)
-		{
-			coinsList = listReply.body;
-			return requestCallback(null, true);
-		}
-		else
-		{
-			coinsList = listReply.body;
-			return requestCallback(null, coinsList);
 		}
 	});
 }

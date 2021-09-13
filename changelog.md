@@ -1,4 +1,11 @@
 # Changelog
 
-**./views/index.ejs**
-* Added hovering for table rows.
+**./routes/coins.js**
+* Removed 'coingecko.getNames' call at the beginning
+* Removed `/names` endpoint.
+
+---
+
+**./src/coingecko.js**
+* Removed 'coinsList' global variable.
+* Removed 'getNamesList' function.
