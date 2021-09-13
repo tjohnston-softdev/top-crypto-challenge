@@ -136,12 +136,12 @@ function callSearch()
 		
 		if (matchFound === true)
 		{
-			rowElement.style.visibility = "visible";
+			rowElement.style.display = "table-row";
 		}
 		else
 		{
 			hideList.push(dataObject.id);
-			rowElement.style.visibility = "collapse";
+			rowElement.style.display = "none";
 		}
 	}
 }
@@ -249,7 +249,7 @@ function renderCurrencyData()
 		
 		if (hideView === true)
 		{
-			dataRow.style.visibility = "collapse";
+			dataRow.style.display = "none";
 		}
 		
 		tableBody.appendChild(dataRow);

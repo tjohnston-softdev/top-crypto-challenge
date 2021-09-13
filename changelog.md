@@ -1,19 +1,7 @@
 # Changelog
 
 **./public/scripts/market-data.js**
-* Wrote new function 'callSearch'
-	* Performs search and updates results.
-	* Toggles rows as needed.
-* Revised how rows are hidden in 'renderCurrencyData'
-	* Now uses 'visibility' instead of 'display'
-* Changes to 'initializeMarketTable'
-	* Declared 'searchTextbox' variable.
-	* Set 'searchTextbox' value to empty in case static HTML fails.
-* Removed test values from 'hideList'
-
----
-
-**./views/index.ejs**
-* Added 'onkeyup' event to 'txtSearch'
-	* Whenever input is changed, run the 'callSearch' function from 'market-data.js'
-* Added empty value property to 'txtSearch'
+* When toggling table rows, the 'display' property is now used instead of 'visibility'
+	* Prevents hidden rows from creating unnecessary whitespace.
+	* There is a proper way to display table row elements.
+	* Related to the 'callSearch' and 'renderCurrencyData' functions.
