@@ -1,3 +1,3 @@
 # Changelog
 
-Submission ready
+Public Commit
