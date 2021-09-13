@@ -1,3 +1,5 @@
+// Prepare market cap data, removing unnecessary properties.
+
 function prepareMarketCapData(marketArray)
 {
 	var loopIndex = 0;

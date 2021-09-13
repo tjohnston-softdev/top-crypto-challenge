@@ -1,6 +1,9 @@
+// CoinGecko API requests.
+
 const needle = require("needle");
 const topURL = writeToplistURL();
 
+// Ping status.
 function checkApiStatus(requestCallback)
 {
 	needle.get("https://api.coingecko.com/api/v3/ping", function (pingErr, pingReply)
@@ -9,10 +12,12 @@ function checkApiStatus(requestCallback)
 		
 		if (pingErr !== null)
 		{
+			// Error sending request.
 			replyMsg = writeRequestError("status check", pingErr.message);
 		}
 		else
 		{
+			// Status retrieved.
 			replyMsg = pingReply.statusCode + " - " + pingReply.statusMessage;
 		}
 		
@@ -21,6 +26,7 @@ function checkApiStatus(requestCallback)
 }
 
 
+// Top 100 by market cap.
 function getCoinToplist(requestCallback)
 {
 	var replyMsg = "";
@@ -29,17 +35,19 @@ function getCoinToplist(requestCallback)
 	{
 		if (listErr !== null)
 		{
+			// Error retrieving data.
 			replyMsg = writeRequestError("coin toplist", listErr.message);
 			return requestCallback(new Error(replyMsg), null);
 		}
 		else
 		{
+			// Successful.
 			return requestCallback(null, listReply.body);
 		}
 	});
 }
 
-
+// API error message.
 function writeRequestError(reqDesc, flagMsg)
 {
 	var writeRes = "";
@@ -55,6 +63,7 @@ function writeRequestError(reqDesc, flagMsg)
 }
 
 
+// Assesmble top 100 URL.
 function writeToplistURL()
 {
 	var urlRes = "";
