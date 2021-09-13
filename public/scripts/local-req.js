@@ -11,6 +11,10 @@ function callStatusRequest()
 		{
 			outputElement.innerHTML = requestObj.responseText;
 		}
+		else if (this.readyState === 4)
+		{
+			outputElement.innerHTML = "???";
+		}
 	};
 	
 	requestObj.open("GET", "api/coins/status");

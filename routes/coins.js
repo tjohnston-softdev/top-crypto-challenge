@@ -23,7 +23,8 @@ router.get('/top', function(req, res, next)
 	{
 		if (coinsErr !== null)
 		{
-			return next(coinsErr);
+			var preparedError = httpErrors(503, coinsErr.message);
+			return next(preparedError);
 		}
 		else
 		{
@@ -36,7 +37,8 @@ router.get('/top', function(req, res, next)
 
 router.get('/error', function(req, res, next)
 {
-	return next(httpErrors(401, "Meow"));
+	var preparedError = httpErrors(500, "Example Error");
+	return next(preparedError);
 });
 
 

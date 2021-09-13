@@ -1,5 +1,11 @@
 # Changelog
 
 **./routes/coins.js**
-* Added requirement for 'http-errors'
-* Error handling pages now work.
+* `/top` endpoint now sends error with message.
+* `/error` endpoint does not meow.
+
+---
+
+**./public/scripts/**
+* If the status request fails, display "???" as the output message. (local-req.js)
+* If the market data request fails, display alert box. (market-data.js)

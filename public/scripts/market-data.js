@@ -112,6 +112,10 @@ function callMarketRequest()
 			tableContElement.style.display = "block";
 			refreshButton.disabled = false;
 		}
+		else if (this.readyState === 4)
+		{
+			alert("Error retrieving market cap data");
+		}
 	};
 	
 	requestObj.open("GET", "api/coins/top");
