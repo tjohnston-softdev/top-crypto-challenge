@@ -33,10 +33,12 @@ a {
 	color: red;
 }
 
+/* Hide sort buttons by default */
 span[data-prop] {
 	display: none;
 }
 
+/* Display sort buttons on column hover. */
 th:hover > span[data-prop] {
 	display: inline;
 }

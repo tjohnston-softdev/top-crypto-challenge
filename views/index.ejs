@@ -23,6 +23,7 @@
 		<h2>Cryptocurrency Prices by Market Cap (AUD)</h2>
 		<br>
 		
+		<!-- Market cap data output section -->
 		<div id="tableContainer">
 			
 			<br>
@@ -36,49 +37,60 @@
 				<table class="table table-responsive table-bordered table-hover">
 					<thead>
 						<tr>
+							
+							<!-- Market cap rank -->
 							<th scope="col" class="col-1">
 								<span>No.   </span>
 								<span class="icon-arrow-circle-up" data-prop="rank" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- Image -->
 							<th scope="col" class="col-1">
 							</th>
 							
+							<!-- Name -->
 							<th scope="col" class="col-2">
 								<span>Name   </span>
 								<span class="icon-arrow-circle-up" data-prop="name" data-alpha="1" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- Symbol -->
 							<th scope="col" class="col-1">
 								<span>Symbol   </span>
 								<span class="icon-arrow-circle-up" data-prop="symbol" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- Price -->
 							<th scope="col" class="col-1">
 								<span>Price   </span>
 								<span class="icon-arrow-circle-up" data-prop="price" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- One hour difference -->
 							<th scope="col" class="col-1">
 								<span>1h   </span>
 								<span class="icon-arrow-circle-up" data-prop="hour" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- One day difference -->
 							<th scope="col" class="col-1">
 								<span>24h   </span>
 								<span class="icon-arrow-circle-up" data-prop="day" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- One week difference -->
 							<th scope="col" class="col-1">
 								<span>7d   </span>
 								<span class="icon-arrow-circle-up" data-prop="week" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- Volume -->
 							<th scope="col" class="col-1">
 								<span>24h Volume   </span>
 								<span class="icon-arrow-circle-up" data-prop="volume" data-alpha="" onclick="handleDataSort(this)"></span>
 							</th>
 							
+							<!-- Market Cap -->
 							<th scope="col" class="col-1">
 								<span>Market Cap   </span>
 								<span class="icon-arrow-circle-up" data-prop="marketCap" data-alpha="" onclick="handleDataSort(this)"></span>
@@ -95,19 +107,23 @@
 		
 		<br>
 		
+		<!-- Load spinner -->
 		<div id="loadContainer">
 			<p>Retrieving CoinGecko Data. Please wait . . .</p>
 			<div class="spinner-border text-primary" role="status" id="loadSpinner"></div>
 		</div>
 		
+		<!-- Refresh button -->
 		<button type="button" class="btn btn-primary" id="btnRefresh" onclick="callMarketRequest()" disabled>
 			<span class="icon-refresh"></span> Refresh
 		</button>
 		
+		<!-- API status button -->
 		<button type="button" class="btn btn-primary" onclick="callStatusRequest()">
 			<span class="icon-signal"></span> Status
 		</button>
 		
+		<!-- Status output -->
 		<p id="lblStatus"></p>
 		
 	</div>
