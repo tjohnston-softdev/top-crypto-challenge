@@ -14,14 +14,14 @@ function handleDataSort(sortButton)
 {
 	var alphaStatus = sortButton.getAttribute("data-alpha");
 	
-	sortObj.prop = sortButton.getAttribute("data-prop");
+	sortObj.col = sortButton.getAttribute("data-prop");
 	sortObj.alpha = Boolean(alphaStatus);
 	
 	if (sortButton.className === "icon-arrow-circle-up")
 	{
 		sortButton.className = "icon-arrow-circle-down"
 		sortObj.dir = 1;
-		retrievedDataArray.reverse();
+		//retrievedDataArray.reverse();
 	}
 	else
 	{
@@ -142,7 +142,7 @@ function performAlphaSort()
 {
 	retrievedDataArray.sort(function(a, b)
 	{
-		return Boolean(a[sortObj.prop].toLowerCase() > b[sortObj.prop].toLowerCase());
+		return Boolean(a[sortObj.col].toLowerCase() > b[sortObj.col].toLowerCase());
 	});
 }
 
@@ -151,7 +151,7 @@ function performNumSort()
 {
 	retrievedDataArray.sort(function(a, b)
 	{
-		return a[sortObj.prop] > b[sortObj.prop];
+		return a[sortObj.col] > b[sortObj.col];
 	});
 }
 
