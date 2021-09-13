@@ -35,11 +35,4 @@ router.get('/top', function(req, res, next)
 });
 
 
-router.get('/error', function(req, res, next)
-{
-	var preparedError = httpErrors(500, "Example Error");
-	return next(preparedError);
-});
-
-
 module.exports = router;

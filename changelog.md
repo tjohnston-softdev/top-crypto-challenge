@@ -1,5 +1,4 @@
 # Changelog
 
-**Commented Files**
-* ./src/coingecko.js
-* ./src/data-prep.js
+**./routes/coins.js**
+* Removed `/error` endpoint.
