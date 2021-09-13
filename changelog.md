@@ -1,4 +1,3 @@
 # Changelog
 
-**./readme.md**
-* Restructured technology credits.
+Submission ready
