@@ -1,4 +1,5 @@
 const express = require('express');
+const httpErrors = require("http-errors");
 const router = express.Router();
 const coingecko = require("../src/coingecko");
 const dataPrep = require("../src/data-prep");
@@ -22,7 +23,7 @@ router.get('/top', function(req, res, next)
 	{
 		if (coinsErr !== null)
 		{
-			res.send(coinsErr);
+			return next(coinsErr);
 		}
 		else
 		{
@@ -35,8 +36,7 @@ router.get('/top', function(req, res, next)
 
 router.get('/error', function(req, res, next)
 {
-	var exampleErr = new Error("Something very bad happened.");
-	res.send(exampleErr);
+	return next(httpErrors(401, "Meow"));
 });
 
 
