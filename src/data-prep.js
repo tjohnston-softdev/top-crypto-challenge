@@ -2,14 +2,10 @@
 
 function prepareMarketCapData(marketArray)
 {
-	var loopIndex = 0;
-	var currentOrig = {};
-	var currentPrep = {};
-	
-	for (loopIndex = 0; loopIndex < marketArray.length; loopIndex = loopIndex + 1)
+	for (var loopIndex = 0; loopIndex < marketArray.length; loopIndex++)
 	{
-		currentOrig = marketArray[loopIndex];
-		currentPrep = {};
+		var currentOrig = marketArray[loopIndex];
+		var currentPrep = {};
 		
 		currentPrep["id"] = currentOrig.id;
 		currentPrep["rank"] = currentOrig["market_cap_rank"];
@@ -26,8 +22,6 @@ function prepareMarketCapData(marketArray)
 		marketArray[loopIndex] = currentPrep;
 	}
 }
-
-
 
 module.exports =
 {
